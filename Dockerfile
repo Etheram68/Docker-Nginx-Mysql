@@ -6,7 +6,7 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/11/19 22:06:29 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/09 15:03:34 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/09 17:35:29 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -42,8 +42,13 @@ RUN apt-get clean \
 	&& rm phpMyAdmin-4.9.4-all-languages.tar.gz \
 	&& rm latest-fr_FR.tar.gz
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* && rm /etc/nginx/sites-enabled/default
+RUN rm /etc/nginx/sites-enabled/default \
+	&& rm /var/www/html/index.nginx-debian.html
 
-CMD ["nginx", "-g", "daemon off;"]
+ADD ./srcs/default etc/nginx/sites-enabled/
+ADD	./srcs/index.html /var/www/html/index.html
 
-EXPOSE 80 443 22
+#CMD ["nginx", "-g", "daemon off;"]
+
+EXPOSE 80 443 22 3306
+VOLUME /app/logs
