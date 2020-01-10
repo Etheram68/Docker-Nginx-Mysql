@@ -6,12 +6,12 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2020/01/10 11:30:59 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/10 12:15:34 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/10 14:24:55 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
-#!/bin/sh
+##!/bin/sh
 
 #Start all service on my docker
 service nginx start
