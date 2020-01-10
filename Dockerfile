@@ -6,7 +6,7 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/11/19 22:06:29 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/10 16:37:37 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/10 18:02:01 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -15,8 +15,9 @@ FROM  debian:buster-slim
 
 LABEL maintainer="Francois Frey <frfrey@student.le-101.fr>"
 
-ENV nginx_host /etc/nginx/sites-enabled/default
-ENV nginx_index /var/www/html/index.html
+ENV NGINX_HOST /etc/nginx/sites-enabled/default
+ENV NGINX_INDEX /var/www/html/index.html
+ENV HOSTNAME /etc/hosts
 
 RUN apt-get update \
 && apt-get -y upgrade \
@@ -46,13 +47,14 @@ RUN apt-get clean \
 	&& mv phpMyAdmin-4.9.4-all-languages phpmyadmin \
 	&& rm phpMyAdmin-4.9.4-all-languages.tar.gz \
 	&& rm latest-fr_FR.tar.gz \
-	&& chmod 777 wordpress
+	&& chmod 777 wordpress \
+	&& chmod 777 phpmyadmin
 
-RUN rm ${nginx_host} \
+RUN rm ${NGINX_HOST} \
 	&& rm /var/www/html/index.nginx-debian.html
 
-ADD ./srcs/default ${nginx_host}
-ADD	./srcs/index.html ${nginx_index}
+ADD ./srcs/default ${NGINX_HOST}
+ADD	./srcs/index.html ${NGINX_INDEX}
 COPY ./srcs/StartupScript.sh .
 COPY ./srcs/init.sql .
 
