@@ -6,7 +6,7 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/11/19 22:06:29 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/10 14:30:35 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/10 16:37:37 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -53,14 +53,13 @@ RUN rm ${nginx_host} \
 
 ADD ./srcs/default ${nginx_host}
 ADD	./srcs/index.html ${nginx_index}
-COPY ./srcs/start.sh /start.sh
-COPY ./srcs/init.sql /init.sql
+COPY ./srcs/StartupScript.sh .
+COPY ./srcs/init.sql .
 
-RUN chmod +x start.sh
-
-#ENTRYPOINT ["/bin/sh", "/start.sh"]
-CMD ["/bin/sh", "start.sh"]
+RUN chmod +x StartupScript.sh
 
 VOLUME /app/logs
 
 EXPOSE 80 443 22 3306
+
+CMD ["/bin/sh", "StartupScript.sh"]
