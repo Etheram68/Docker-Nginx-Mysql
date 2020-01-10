@@ -6,14 +6,14 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/11/19 22:06:29 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/09 17:35:29 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/10 12:11:27 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 FROM  debian:buster-slim
 
-LABEL maintainer="frfrey@student.le-101.fr"
+LABEL maintainer="Francois Frey <frfrey@student.le-101.fr>"
 
 RUN apt-get update \
 && apt-get -y upgrade \
@@ -30,7 +30,9 @@ RUN apt-get update \
 	php-gd \
 	php-mbstring \
 	wget \
-&& apt-get clean -y
+&& apt-get clean -y \
+&& apt-get update \
+&& apt-get -y upgrade
 
 RUN apt-get clean \
 	&& cd /var/www/html \
@@ -40,15 +42,21 @@ RUN apt-get clean \
 	&& tar -xvf phpMyAdmin-4.9.4-all-languages.tar.gz \
 	&& mv phpMyAdmin-4.9.4-all-languages phpmyadmin \
 	&& rm phpMyAdmin-4.9.4-all-languages.tar.gz \
-	&& rm latest-fr_FR.tar.gz
+	&& rm latest-fr_FR.tar.gz \
+	&& chmod 777 wordpress
 
 RUN rm /etc/nginx/sites-enabled/default \
 	&& rm /var/www/html/index.nginx-debian.html
 
 ADD ./srcs/default etc/nginx/sites-enabled/
 ADD	./srcs/index.html /var/www/html/index.html
+ADD ./srcs/start.sh ./
+ADD ./srcs/init.sql ./
 
-#CMD ["nginx", "-g", "daemon off;"]
+RUN chmod 777 start.sh
 
 EXPOSE 80 443 22 3306
 VOLUME /app/logs
+
+#ENTRYPOINT ["./start.sh"]
+#CMD ["nginx", "-g", "daemon off;"]
