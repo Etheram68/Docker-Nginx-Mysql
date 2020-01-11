@@ -6,7 +6,7 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/11/19 22:06:29 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/11 10:39:01 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/11 13:26:18 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -54,8 +54,13 @@ RUN apt-get clean \
 RUN rm ${NGINX_HOST} \
 	&& rm /var/www/html/index.nginx-debian.html
 
-ADD ./srcs/default ${NGINX_HOST}
+ADD ./srcs/nginx/default ${NGINX_HOST}
 ADD	./srcs/index.html ${NGINX_INDEX}
+ADD ./srcs/nginx/nginx-selfsigned.key /etc/ssl/private/nginx-selfsigned.key
+ADD ./srcs/nginx/nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.crt
+ADD ./srcs/nginx/dhparam.pem /etc/nginx/dhparam.pem
+ADD ./srcs/nginx/self-signed.conf /etc/nginx/snippets/self-signed.conf
+ADD ./srcs/nginx/ssl-params.conf /etc/nginx/snippets/ssl-params.conf
 COPY ./srcs/StartupScript.sh .
 COPY ./srcs/init.sql .
 
