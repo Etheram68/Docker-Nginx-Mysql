@@ -6,7 +6,7 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/11/19 22:06:29 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/10 18:02:01 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/11 10:39:01 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -15,9 +15,9 @@ FROM  debian:buster-slim
 
 LABEL maintainer="Francois Frey <frfrey@student.le-101.fr>"
 
-ENV NGINX_HOST /etc/nginx/sites-enabled/default
+ENV NGINX_HOST /etc/nginx/sites-available/default
 ENV NGINX_INDEX /var/www/html/index.html
-ENV HOSTNAME /etc/hosts
+ENV ENV off
 
 RUN apt-get update \
 && apt-get -y upgrade \
@@ -34,6 +34,7 @@ RUN apt-get update \
 	php-gd \
 	php-mbstring \
 	wget \
+	vim \
 && apt-get clean -y \
 && apt-get update \
 && apt-get -y upgrade

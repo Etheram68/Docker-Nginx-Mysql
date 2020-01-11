@@ -6,7 +6,7 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2020/01/10 14:31:25 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/10 17:18:18 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/10 19:58:08 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -30,7 +30,7 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
 	#Restart mysql service
 	service mysql --full-restart
 
-	ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled
+	#ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled
 
 	#remove init.sql
 	rm init.sql
