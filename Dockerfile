@@ -6,7 +6,7 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/11/19 22:06:29 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/11 13:26:18 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/11 14:38:16 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -48,11 +48,12 @@ RUN apt-get clean \
 	&& mv phpMyAdmin-4.9.4-all-languages phpmyadmin \
 	&& rm phpMyAdmin-4.9.4-all-languages.tar.gz \
 	&& rm latest-fr_FR.tar.gz \
-	&& chmod 777 wordpress \
-	&& chmod 777 phpmyadmin
+	&& chmod 777 -R wordpress \
+	&& chmod 777 -R phpmyadmin
 
 RUN rm ${NGINX_HOST} \
-	&& rm /var/www/html/index.nginx-debian.html
+	&& rm /var/www/html/index.nginx-debian.html\
+	&& rm /var/www/html/phpmyadmin/config.sample.inc.php
 
 ADD ./srcs/nginx/default ${NGINX_HOST}
 ADD	./srcs/index.html ${NGINX_INDEX}
@@ -61,6 +62,7 @@ ADD ./srcs/nginx/nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.crt
 ADD ./srcs/nginx/dhparam.pem /etc/nginx/dhparam.pem
 ADD ./srcs/nginx/self-signed.conf /etc/nginx/snippets/self-signed.conf
 ADD ./srcs/nginx/ssl-params.conf /etc/nginx/snippets/ssl-params.conf
+ADD ./srcs/config.inc.php /var/www/html/phpmyadmin/config.inc.php
 COPY ./srcs/StartupScript.sh .
 COPY ./srcs/init.sql .
 
