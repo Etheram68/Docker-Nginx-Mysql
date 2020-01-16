@@ -6,7 +6,7 @@
 #    By: frfrey <frfrey@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2020/01/10 14:31:25 by frfrey       #+#   ##    ##    #+#        #
-#    Updated: 2020/01/11 12:57:15 by frfrey      ###    #+. /#+    ###.fr      #
+#    Updated: 2020/01/16 14:02:31 by frfrey      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -26,6 +26,7 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
 
 	#Create a mysql user
 	mysql < init.sql
+	mysql < /var/www/html/phpmyadmin/sql/create_tables.sql
 
 	#Restart mysql service
 	service mysql --full-restart
